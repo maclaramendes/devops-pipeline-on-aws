@@ -35,7 +35,4 @@ minikube*
 
 ###Terraform###
 *.tfstate
-.terraform/
-*.tfvars
-.terraform.lock.hcl
-terraform.tfstate.backup
+*.tfstate.*
