@@ -19,18 +19,23 @@ public class Urlcontroller {
     @Autowired
     private UrlServices urlServices;
 
-    @PostMapping("/shorten")
-    public ResponseEntity<Map<String, String>> shortenUrl(@RequestBody Map<String, String> request) {
-        String originalUrl = request.get("originalUrl");
-
-        Url url = urlServices.createUrl(originalUrl);
-
-        Map<String, String> response = new HashMap<>();
-        response.put("originalUrl", url.getOriginalUrl());
-        response.put("shortUrl", "http://localhost:8080/" + url.getShortenedUrl());
-
-        return ResponseEntity.ok(response);
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("API running");
     }
+
+    @PostMapping("/shorten")
+public ResponseEntity<Map<String, String>> shortenUrl(@RequestBody Map<String, String> request) {
+    String originalUrl = request.get("originalUrl");
+
+    Url url = urlServices.createUrl(originalUrl);
+
+    Map<String, String> response = new HashMap<>();
+    response.put("originalUrl", url.getOriginalUrl());
+    response.put("shortUrl", "/" + url.getShortenedUrl());
+
+    return ResponseEntity.ok(response);
+}
 
     @GetMapping("/{shortUrl}")
     public ResponseEntity<Object> redirectToOriginalUrl(@PathVariable String shortUrl) {
