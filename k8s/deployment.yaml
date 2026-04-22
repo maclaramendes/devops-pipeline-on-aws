@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: link-shortener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: link-shortener
+  template:
+    metadata:
+      labels:
+        app: link-shortener
+    spec:
+      containers:
+        - name: app
+          image: api-link:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "500m"
