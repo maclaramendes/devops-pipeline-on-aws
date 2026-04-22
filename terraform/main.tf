@@ -59,7 +59,7 @@ resource "aws_instance" "devops_project_server" {
   instance_type = "t3.micro"
   key_name = "devops_project-2026"
   vpc_security_group_ids = [aws_security_group.k3s_sg.id]
-  associate_public_ip_address = false
+  associate_public_ip_address = true
   subnet_id = "subnet-039342ad0e3521af2"
 
   tags = {
